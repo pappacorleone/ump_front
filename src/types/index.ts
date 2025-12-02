@@ -220,3 +220,65 @@ export interface SearchFilters {
   dateTo?: Date
   minRelevance?: number
 }
+
+// Roleplay Types
+export type CoachingLevel = 'off' | 'subtle' | 'active'
+export type PartnerEmotionalState = 'opening' | 'escalation' | 'deescalation' | 'challenging' | 'receptive'
+
+export interface RoleplayMessage {
+  id: string
+  role: 'user' | 'partner'
+  content: string
+  timestamp: Date
+  emotionalTone?: string
+  techniquesUsed?: string[]
+}
+
+export interface RoleplayGoal {
+  id: string
+  description: string
+  completed: boolean
+}
+
+export interface RoleplaySession {
+  id: string
+  partnerId: string
+  partnerName: string
+  skillId: string
+  skillName: string
+  scenario: string
+  goals: RoleplayGoal[]
+  coachingLevel: CoachingLevel
+  messages: RoleplayMessage[]
+  startedAt: Date
+  endedAt?: Date
+  duration?: number // in seconds
+  insights?: RoleplayInsights
+  partnerEmotionalState: PartnerEmotionalState
+  techniquesAttempted: string[]
+  activeLens?: LensType
+}
+
+export interface RoleplayInsights {
+  techniquesUsed: string[]
+  emotionalJourney: Array<{
+    timestamp: Date
+    emotion: string
+    intensity: number
+  }>
+  highlights: string[]
+  growthAreas: string[]
+  overallScore?: number
+  keyMoments: Array<{
+    timestamp: Date
+    description: string
+    type: 'breakthrough' | 'challenge' | 'technique'
+  }>
+}
+
+export interface CoachingHint {
+  id: string
+  content: string
+  type: 'technique' | 'warning' | 'encouragement'
+  dismissed: boolean
+}
