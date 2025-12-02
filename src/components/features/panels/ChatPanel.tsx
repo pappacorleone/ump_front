@@ -38,13 +38,25 @@ const formatMessageContent = (content: string, highlightedTerms?: string[]) => {
   return paragraphs
 }
 
+// Helper to get static lens background colors
+const getLensBgClass = (lens: LensType) => {
+  const bgClasses: Record<LensType, string> = {
+    'damasio': 'bg-damasio-lens',
+    'cbt': 'bg-cbt-lens',
+    'act': 'bg-act-lens',
+    'ifs': 'bg-ifs-lens',
+    'stoic': 'bg-stoic-lens',
+  }
+  return bgClasses[lens] || 'bg-text-secondary'
+}
+
 const LensBadge: FC<{ lens: LensType }> = ({ lens }) => {
   const lensInfo = LENSES.find(l => l.id === lens)
   if (!lensInfo) return null
 
   return (
     <span className={cn('lens-badge', `lens-badge--${lens}`)}>
-      <span className={cn('w-1.5 h-1.5 rounded-full', `bg-${lens}-lens`)} />
+      <span className={cn('w-1.5 h-1.5 rounded-full', getLensBgClass(lens))} />
       {lensInfo.name} Lens
     </span>
   )

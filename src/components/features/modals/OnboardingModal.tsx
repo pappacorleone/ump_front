@@ -6,6 +6,30 @@ import { useGingerStore } from '@/stores/useGingerStore'
 import { cn } from '@/lib/utils'
 import { GingerLogo, Brain, MessageSquare, GitBranch, Activity, ChevronRight, Check } from '@/components/ui/Icons'
 import { LENSES } from '@/constants'
+import type { LensType } from '@/types'
+
+// Helper to get static lens background colors (Tailwind needs static classes)
+const getLensBgClass = (color: string) => {
+  const bgClasses: Record<string, string> = {
+    'damasio-lens': 'bg-damasio-lens/10',
+    'cbt-lens': 'bg-cbt-lens/10',
+    'act-lens': 'bg-act-lens/10',
+    'ifs-lens': 'bg-ifs-lens/10',
+    'stoic-lens': 'bg-stoic-lens/10',
+  }
+  return bgClasses[color] || 'bg-surface'
+}
+
+const getLensSolidBgClass = (color: string) => {
+  const bgClasses: Record<string, string> = {
+    'damasio-lens': 'bg-damasio-lens',
+    'cbt-lens': 'bg-cbt-lens',
+    'act-lens': 'bg-act-lens',
+    'ifs-lens': 'bg-ifs-lens',
+    'stoic-lens': 'bg-stoic-lens',
+  }
+  return bgClasses[color] || 'bg-text-secondary'
+}
 
 const ONBOARDING_STEPS = [
   {
@@ -149,10 +173,10 @@ export const OnboardingModal: FC = () => {
                       <div
                         className={cn(
                           'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0',
-                          `bg-${lens.color}/10`
+                          getLensBgClass(lens.color)
                         )}
                       >
-                        <div className={cn('w-4 h-4 rounded-full', `bg-${lens.color}`)} />
+                        <div className={cn('w-4 h-4 rounded-full', getLensSolidBgClass(lens.color))} />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2">

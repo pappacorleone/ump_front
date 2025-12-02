@@ -77,6 +77,18 @@ const LENS_INFO = {
   stoic: { name: 'Stoic', color: 'stoic-lens', icon: Brain }
 }
 
+// Helper to get static lens classes (Tailwind needs static classes)
+const getLensClasses = (color: string) => {
+  const classes: Record<string, { bg: string; text: string; bgLight: string }> = {
+    'damasio-lens': { bg: 'bg-damasio-lens', text: 'text-damasio-lens', bgLight: 'bg-damasio-lens/10' },
+    'cbt-lens': { bg: 'bg-cbt-lens', text: 'text-cbt-lens', bgLight: 'bg-cbt-lens/10' },
+    'ifs-lens': { bg: 'bg-ifs-lens', text: 'text-ifs-lens', bgLight: 'bg-ifs-lens/10' },
+    'act-lens': { bg: 'bg-act-lens', text: 'text-act-lens', bgLight: 'bg-act-lens/10' },
+    'stoic-lens': { bg: 'bg-stoic-lens', text: 'text-stoic-lens', bgLight: 'bg-stoic-lens/10' },
+  }
+  return classes[color] || { bg: 'bg-text-secondary', text: 'text-text-secondary', bgLight: 'bg-surface' }
+}
+
 export const PatternAnalysisModal: FC = () => {
   const { patternModalOpen, setPatternModalOpen, addArtifact, selectedSourceIds, sources } = useGingerStore()
   const [isAnalyzing, setIsAnalyzing] = useState(true)
@@ -234,7 +246,8 @@ export const PatternAnalysisModal: FC = () => {
                     <div className="flex items-center gap-2">
                       <span className={cn(
                         'px-1.5 py-0.5 rounded text-xs',
-                        `bg-${lensInfo.color}/10 text-${lensInfo.color}`
+                        getLensClasses(lensInfo.color).bgLight,
+                        getLensClasses(lensInfo.color).text
                       )}>
                         {lensInfo.name}
                       </span>
@@ -266,7 +279,8 @@ export const PatternAnalysisModal: FC = () => {
                       <div className="flex items-center gap-2">
                         <span className={cn(
                           'px-2 py-0.5 rounded text-xs font-medium',
-                          `bg-${LENS_INFO[selectedPattern.lens].color}/10 text-${LENS_INFO[selectedPattern.lens].color}`
+                          getLensClasses(LENS_INFO[selectedPattern.lens].color).bgLight,
+                          getLensClasses(LENS_INFO[selectedPattern.lens].color).text
                         )}>
                           {LENS_INFO[selectedPattern.lens].name} Lens
                         </span>

@@ -2,6 +2,7 @@
 
 import { type FC, useState, useRef, type ChangeEvent, type DragEvent } from 'react'
 import { cn } from '@/lib/utils'
+import { useUIStore } from '@/stores/useUIStore'
 import { useGingerStore } from '@/stores/useGingerStore'
 import { Modal } from '@/components/ui/Modal'
 import { 
@@ -14,7 +15,8 @@ import {
 } from '@/components/ui/Icons'
 
 export const AddSourceModal: FC = () => {
-  const { addSourceModalOpen, setAddSourceModalOpen, addSource } = useGingerStore()
+  const { addSourceModalOpen, setAddSourceModalOpen } = useUIStore()
+  const { addSource } = useGingerStore()
   const [urlInput, setUrlInput] = useState('')
   const [isDragging, setIsDragging] = useState(false)
   const [inputType, setInputType] = useState<'none' | 'url'>('none')

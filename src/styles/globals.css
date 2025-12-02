@@ -24,6 +24,31 @@
     --warning: #C2A05B;
     --error: #C25B5B;
 
+    /* Emotion colors (Damasio primary emotions) */
+    --emotion-fear: #9B59B6;
+    --emotion-anger: #E74C3C;
+    --emotion-joy: #F1C40F;
+    --emotion-sadness: #3498DB;
+    --emotion-disgust: #27AE60;
+    --emotion-surprise: #E67E22;
+    
+    /* Consciousness visualization */
+    --body-energy: #27AE60;
+    --body-stress: #E74C3C;
+    --body-tension: #9B59B6;
+    --body-arousal: #E67E22;
+    --body-valence-positive: #2ECC71;
+    --body-valence-negative: #E74C3C;
+    
+    /* Voice indicator */
+    --voice-contact: var(--voice-accent);
+    --voice-ai: var(--damasio-lens);
+    
+    /* Memory salience */
+    --salience-high: #F39C12;
+    --salience-medium: #95A5A6;
+    --salience-low: #BDC3C7;
+
     /* Spacing System */
     --space-1: 0.25rem;   /* 4px */
     --space-2: 0.5rem;    /* 8px */
@@ -76,6 +101,27 @@ html.dark {
   --success: #85B885;
   --warning: #D6B46F;
   --error: #D66F6F;
+
+  /* Emotion colors (adjusted for dark mode) */
+  --emotion-fear: #B57EDC;
+  --emotion-anger: #F27868;
+  --emotion-joy: #F4D03F;
+  --emotion-sadness: #5DADE2;
+  --emotion-disgust: #52C97A;
+  --emotion-surprise: #F39C44;
+  
+  /* Consciousness visualization (adjusted) */
+  --body-energy: #52C97A;
+  --body-stress: #F27868;
+  --body-tension: #B57EDC;
+  --body-arousal: #F39C44;
+  --body-valence-positive: #58D68D;
+  --body-valence-negative: #F27868;
+  
+  /* Memory salience (adjusted) */
+  --salience-high: #F5B041;
+  --salience-medium: #AAB7B8;
+  --salience-low: #808B96;
 }
 
 @layer components {
@@ -211,6 +257,143 @@ html.dark {
     @apply rounded-xl border border-border-light p-6
            transition-all duration-200 hover:shadow-card hover:-translate-y-0.5;
     background-color: var(--card-background);
+  }
+
+  /* Emotion Badge */
+  .emotion-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .emotion-badge--fear {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: var(--emotion-fear);
+  }
+
+  .emotion-badge--anger {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--emotion-anger);
+  }
+
+  .emotion-badge--joy {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--emotion-joy);
+  }
+
+  .emotion-badge--sadness {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--emotion-sadness);
+  }
+
+  .emotion-badge--disgust {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--emotion-disgust);
+  }
+
+  .emotion-badge--surprise {
+    background-color: rgba(230, 126, 34, 0.1);
+    color: var(--emotion-surprise);
+  }
+
+  /* Memory Card with Salience-based styling */
+  .memory-card {
+    @apply rounded-xl border p-4 transition-all duration-200;
+  }
+
+  .memory-card--high-salience {
+    border-color: var(--salience-high);
+    background-color: rgba(243, 156, 18, 0.05);
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.15);
+  }
+
+  .memory-card--medium-salience {
+    @apply border-border-light bg-surface;
+  }
+
+  .memory-card--low-salience {
+    @apply border-border-light bg-surface opacity-70;
+  }
+
+  /* Consciousness Meter */
+  .consciousness-meter {
+    @apply relative h-2 bg-border-light rounded-full overflow-hidden;
+  }
+
+  .consciousness-meter-fill {
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+  }
+
+  /* Voice Waveform */
+  .voice-waveform {
+    @apply flex items-center gap-1 h-8;
+  }
+
+  .voice-waveform-bar {
+    @apply w-1 bg-voice-accent rounded-full transition-all duration-75;
+  }
+
+  /* Somatic Pulse Animation */
+  .somatic-pulse {
+    animation: somatic-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes somatic-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+  }
+
+  /* Body Map Highlight */
+  .body-part-active {
+    @apply transition-all duration-500;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  /* Emotion Intensity Bar */
+  .emotion-intensity {
+    @apply h-1 rounded-full transition-all duration-300;
+  }
+
+  /* Contact Voice Indicator */
+  .voice-indicator {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium;
+  }
+
+  .voice-indicator--contact {
+    @apply bg-voice-contact/10 text-voice-contact;
+  }
+
+  .voice-indicator--ai {
+    @apply bg-voice-ai/10 text-voice-ai;
+  }
+
+  /* Relationship Type Badge */
+  .relationship-badge {
+    @apply px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .relationship-badge--friend {
+    @apply bg-act-lens/10 text-act-lens;
+  }
+
+  .relationship-badge--family {
+    @apply bg-ifs-lens/10 text-ifs-lens;
+  }
+
+  .relationship-badge--colleague {
+    @apply bg-cbt-lens/10 text-cbt-lens;
+  }
+
+  .relationship-badge--romantic {
+    @apply bg-voice-accent/10 text-voice-accent;
+  }
+
+  .relationship-badge--other {
+    @apply bg-text-secondary/10 text-text-secondary;
   }
 }
 

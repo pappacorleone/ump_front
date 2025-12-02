@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { DM_Sans, Fraunces, JetBrains_Mono } from 'next/font/google'
+import { MainLayout } from '@/components/layouts/MainLayout'
 import '@/styles/globals.css'
 
 const dmSans = DM_Sans({
@@ -35,7 +36,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${dmSans.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <MainLayout>
+          {children}
+        </MainLayout>
+      </body>
     </html>
   )
 }

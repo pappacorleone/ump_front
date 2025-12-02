@@ -90,9 +90,7 @@ export const FloatingLensSelector: FC = () => {
                     <div
                       className={cn(
                         'w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-colors',
-                        isActive
-                          ? `bg-${lens.color} border-${lens.color}`
-                          : 'border-border-medium bg-background'
+                        !isActive && 'border-border-medium bg-background'
                       )}
                       style={isActive ? {
                         backgroundColor: `var(--${lens.color})`,
@@ -104,10 +102,11 @@ export const FloatingLensSelector: FC = () => {
 
                     {/* Lens info */}
                     <div className="flex-1 min-w-0">
-                      <p className={cn(
-                        'text-sm font-medium',
-                        isActive ? `text-${lens.color}` : 'text-text-primary'
-                      )}
+                      <p
+                        className={cn(
+                          'text-sm font-medium',
+                          !isActive && 'text-text-primary'
+                        )}
                         style={isActive ? { color: `var(--${lens.color})` } : undefined}
                       >
                         {lens.name}

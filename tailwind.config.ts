@@ -31,6 +31,27 @@ const config: Config = {
         'success': 'var(--success)',
         'warning': 'var(--warning)',
         'error': 'var(--error)',
+        // Emotion colors
+        'emotion-fear': 'var(--emotion-fear)',
+        'emotion-anger': 'var(--emotion-anger)',
+        'emotion-joy': 'var(--emotion-joy)',
+        'emotion-sadness': 'var(--emotion-sadness)',
+        'emotion-disgust': 'var(--emotion-disgust)',
+        'emotion-surprise': 'var(--emotion-surprise)',
+        // Consciousness/Body colors
+        'body-energy': 'var(--body-energy)',
+        'body-stress': 'var(--body-stress)',
+        'body-tension': 'var(--body-tension)',
+        'body-arousal': 'var(--body-arousal)',
+        'body-valence-positive': 'var(--body-valence-positive)',
+        'body-valence-negative': 'var(--body-valence-negative)',
+        // Voice indicators
+        'voice-contact': 'var(--voice-contact)',
+        'voice-ai': 'var(--voice-ai)',
+        // Memory salience
+        'salience-high': 'var(--salience-high)',
+        'salience-medium': 'var(--salience-medium)',
+        'salience-low': 'var(--salience-low)',
       },
       fontFamily: {
         serif: ['var(--font-fraunces)', 'Georgia', 'Times New Roman', 'serif'],
@@ -54,6 +75,9 @@ const config: Config = {
         'slide-in-right': 'slide-in-right 400ms ease-in-out',
         'fade-in': 'fade-in 250ms ease-out',
         'scale-in': 'scale-in 200ms ease-out',
+        'somatic-pulse': 'somatic-pulse 2s ease-in-out infinite',
+        'emotion-decay': 'emotion-decay 5s ease-out forwards',
+        'consciousness-flow': 'consciousness-flow 3s ease-in-out infinite',
       },
       keyframes: {
         'waveform': {
@@ -79,6 +103,18 @@ const config: Config = {
         'scale-in': {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'somatic-pulse': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.7' },
+          '50%': { transform: 'scale(1.05)', opacity: '1' },
+        },
+        'emotion-decay': {
+          '0%': { opacity: '1', transform: 'scale(1)' },
+          '100%': { opacity: '0.3', transform: 'scale(0.95)' },
+        },
+        'consciousness-flow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-4px)' },
         },
       },
       boxShadow: {
