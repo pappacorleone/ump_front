@@ -1,4 +1,4 @@
-import type { Source, Message, Artifact } from '@/types'
+import type { Source, Message, Artifact, DataSource, ContactGroup, Draft } from '@/types'
 
 // Use fixed dates to avoid hydration mismatches between server and client
 const FIXED_NOW = new Date('2024-01-15T10:30:00Z')
@@ -85,6 +85,92 @@ export const sampleArtifacts: Artifact[] = [
     title: 'Evening Anxiety Loop',
     description: 'Recurring pattern of anxious thoughts before bed.',
     date: FOUR_DAYS_AGO
+  }
+]
+
+// ============================================
+// Filter Bar Mock Data
+// ============================================
+
+// Data Sources for Filter Bar
+export const mockDataSources: DataSource[] = [
+  {
+    id: 'ds_imessage',
+    platform: 'imessage',
+    name: 'iMessage',
+    isConnected: true,
+    lastSyncedAt: new Date(FIXED_NOW.getTime() - 120000), // 2 mins ago
+    messageCount: 142
+  },
+  {
+    id: 'ds_whatsapp',
+    platform: 'whatsapp',
+    name: 'WhatsApp',
+    isConnected: true,
+    lastSyncedAt: new Date(FIXED_NOW.getTime() - 3600000), // 1 hour ago
+    messageCount: 89
+  },
+  {
+    id: 'ds_gmail',
+    platform: 'gmail',
+    name: 'Gmail',
+    isConnected: true,
+    lastSyncedAt: new Date(FIXED_NOW.getTime() - 300000), // 5 mins ago
+    messageCount: 0
+  },
+  {
+    id: 'ds_voice',
+    platform: 'voice_memos',
+    name: 'Voice Memos',
+    isConnected: false,
+    lastSyncedAt: null,
+    messageCount: 0
+  }
+]
+
+// Contact Groups for Filter Bar
+export const mockContactGroups: ContactGroup[] = [
+  {
+    id: 'grp_family',
+    name: 'Family Group',
+    memberIds: ['+0987654321', '+1122334455', '+5566778899', '+9988776655'],
+    createdAt: new Date('2023-06-01')
+  },
+  {
+    id: 'grp_work',
+    name: 'Work Team',
+    memberIds: ['+1111111111', '+2222222222'],
+    createdAt: new Date('2024-01-15')
+  }
+]
+
+// Drafts for Filter Bar Drafts Stack
+export const mockDrafts: Draft[] = [
+  {
+    id: 'draft_1',
+    type: 'pattern',
+    title: 'Defensive Withdrawal Pattern',
+    content: 'Defensive withdrawal often occurs when schedules are questioned. This triggers a protective response rooted in earlier experiences of feeling controlled.',
+    createdAt: new Date(FIXED_NOW.getTime() - 86400000), // 1 day ago
+    updatedAt: new Date(FIXED_NOW.getTime() - 86400000)
+  },
+  {
+    id: 'draft_2',
+    type: 'reply',
+    title: 'Reply to Sarah',
+    content: 'I hear that you feel ignored. I was focused on work, but I want to listen now.',
+    relatedContactId: '+1234567890',
+    relatedContactName: 'Sarah',
+    createdAt: new Date(FIXED_NOW.getTime() - 3600000), // 1 hour ago
+    updatedAt: new Date(FIXED_NOW.getTime() - 3600000)
+  },
+  {
+    id: 'draft_3',
+    type: 'insight',
+    title: 'Communication Pattern',
+    content: 'When feeling criticized, the instinct is to defend rather than listen. Consider pausing before responding.',
+    createdAt: new Date(FIXED_NOW.getTime() - 7200000), // 2 hours ago
+    updatedAt: new Date(FIXED_NOW.getTime() - 7200000)
   }
 ]
 

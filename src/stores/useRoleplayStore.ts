@@ -17,25 +17,28 @@ import {
   getSkillById
 } from '@/lib/skills/communicationSkills'
 
+// Skill progress entry type
+interface SkillProgressEntry {
+  sessionsCompleted: number
+  averageScore: number
+  techniquesUsed: string[]
+  lastPracticed: Date
+}
+
 interface RoleplayState {
   // Current session
   currentSession: RoleplaySession | null
   isSessionActive: boolean
-  
+
   // Session history
   completedSessions: RoleplaySession[]
-  
+
   // Coaching state
   activeHints: CoachingHint[]
   showCoachingPanel: boolean
-  
+
   // Progress tracking
-  skillProgress: Record<string, {
-    sessionsCompleted: number
-    averageScore: number
-    techniquesUsed: string[]
-    lastPracticed: Date
-  }>
+  skillProgress: Record<string, SkillProgressEntry>
   
   // Actions - Session Management
   startSession: (config: {
@@ -71,7 +74,7 @@ interface RoleplayState {
   
   // Getters
   getSessionsBySkill: (skillId: string) => RoleplaySession[]
-  getSkillProgress: (skillId: string) => typeof RoleplayState.prototype.skillProgress[string] | null
+  getSkillProgress: (skillId: string) => SkillProgressEntry | null
 }
 
 export const useRoleplayStore = create<RoleplayState>((set, get) => ({

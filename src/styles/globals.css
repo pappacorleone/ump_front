@@ -9,6 +9,7 @@
     --surface: #F5F1EB;
     --text-primary: #2D2A26;
     --text-secondary: #6B6560;
+    --text-tertiary: #9A958E;
     --voice-accent: #C25B4A;
     --damasio-lens: #8B7355;
     --cbt-lens: #5B8AC2;
@@ -87,6 +88,7 @@ html.dark {
   --surface: #1A1816;
   --text-primary: #F5F2ED;
   --text-secondary: #8A847D;
+  --text-tertiary: #5E5A55;
   --voice-accent: #E07A69;
   --damasio-lens: #C9A882;
   --cbt-lens: #7DA6D6;
@@ -226,7 +228,7 @@ html.dark {
   /* Button Styles */
   .btn-primary {
     @apply px-6 py-2.5 rounded-lg font-medium bg-voice-accent text-white
-           shadow-sm hover:bg-voice-accent/90 hover:shadow-md
+           shadow-sm hover:opacity-90 hover:shadow-md
            transition-all duration-200 ease-out;
   }
 
@@ -394,6 +396,193 @@ html.dark {
 
   .relationship-badge--other {
     @apply bg-text-secondary/10 text-text-secondary;
+  }
+
+  /* ============================================
+     Filter Bar Components
+     ============================================ */
+
+  /* Filter Segment - clickable parts of the sentence query */
+  .filter-segment {
+    @apply inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md
+           cursor-pointer transition-all duration-200
+           hover:bg-hover-surface;
+  }
+
+  .filter-segment--active {
+    @apply bg-hover-surface;
+  }
+
+  .filter-segment--highlight {
+    @apply text-voice-accent font-medium underline decoration-dotted underline-offset-4;
+  }
+
+  /* Filter Popover */
+  .filter-popover {
+    @apply absolute top-full mt-2 bg-surface rounded-xl border border-border-light
+           shadow-modal z-50 overflow-hidden;
+  }
+
+  .filter-popover-header {
+    @apply flex items-center justify-between px-4 py-3 border-b border-border-light;
+  }
+
+  .filter-popover-header-title {
+    @apply text-xs font-semibold uppercase tracking-wider text-text-secondary;
+  }
+
+  /* Source Item in filter popover */
+  .filter-source-item {
+    @apply flex items-center gap-3 px-4 py-3 cursor-pointer
+           transition-colors duration-150 hover:bg-hover-surface;
+  }
+
+  .filter-source-item--selected {
+    @apply bg-hover-surface;
+  }
+
+  /* Contact Item in filter popover */
+  .filter-contact-item {
+    @apply flex items-center gap-3 px-4 py-2.5 cursor-pointer
+           transition-colors duration-150 hover:bg-hover-surface;
+  }
+
+  /* Contact Avatar */
+  .filter-avatar {
+    @apply w-8 h-8 rounded-full flex items-center justify-center
+           text-sm font-medium text-white;
+  }
+
+  .filter-avatar--friend {
+    @apply bg-act-lens;
+  }
+
+  .filter-avatar--family {
+    @apply bg-ifs-lens;
+  }
+
+  .filter-avatar--colleague {
+    @apply bg-cbt-lens;
+  }
+
+  .filter-avatar--romantic {
+    @apply bg-voice-accent;
+  }
+
+  .filter-avatar--other {
+    @apply bg-text-secondary;
+  }
+
+  /* Time Preset Button */
+  .time-preset {
+    @apply flex items-center gap-2 px-4 py-2.5 text-sm text-left
+           transition-colors duration-150 hover:bg-hover-surface cursor-pointer;
+  }
+
+  .time-preset--selected {
+    @apply text-voice-accent font-medium;
+  }
+
+  /* Calendar Day */
+  .calendar-day {
+    @apply w-8 h-8 flex items-center justify-center text-sm rounded-full
+           cursor-pointer transition-colors duration-150 hover:bg-hover-surface;
+  }
+
+  .calendar-day--selected {
+    @apply bg-voice-accent text-white;
+  }
+
+  .calendar-day--in-range {
+    @apply bg-voice-accent/20;
+  }
+
+  .calendar-day--today {
+    @apply ring-1 ring-voice-accent;
+  }
+
+  .calendar-day--disabled {
+    @apply opacity-30 cursor-not-allowed;
+  }
+
+  /* Drafts Stack Panel */
+  .drafts-panel {
+    @apply fixed top-0 right-0 h-full bg-surface border-l border-border-light
+           shadow-modal z-50 transition-transform duration-300 ease-out;
+  }
+
+  .drafts-panel--open {
+    @apply translate-x-0;
+  }
+
+  .drafts-panel--closed {
+    @apply translate-x-full;
+  }
+
+  .drafts-panel-backdrop {
+    @apply fixed inset-0 bg-black/30 z-40 transition-opacity duration-300;
+  }
+
+  /* Draft Card */
+  .draft-card {
+    @apply p-3 rounded-lg bg-background border border-border-light
+           transition-all duration-200 hover:border-border-medium;
+  }
+
+  .draft-type-badge {
+    @apply px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .draft-type-badge--pattern {
+    @apply bg-damasio-lens/10 text-damasio-lens;
+  }
+
+  .draft-type-badge--reply {
+    @apply bg-voice-accent/10 text-voice-accent;
+  }
+
+  .draft-type-badge--insight {
+    @apply bg-cbt-lens/10 text-cbt-lens;
+  }
+
+  /* Platform Icon Colors */
+  .platform-icon--imessage {
+    @apply text-act-lens;
+  }
+
+  .platform-icon--whatsapp {
+    @apply text-success;
+  }
+
+  .platform-icon--gmail {
+    @apply text-error;
+  }
+
+  .platform-icon--voice_memos {
+    @apply text-ifs-lens;
+  }
+
+  /* Sync Status Indicator */
+  .sync-status {
+    @apply flex items-center gap-1.5 text-xs text-text-secondary;
+  }
+
+  .sync-status-dot {
+    @apply w-1.5 h-1.5 rounded-full;
+  }
+
+  .sync-status-dot--synced {
+    @apply bg-success;
+  }
+
+  .sync-status-dot--not-connected {
+    @apply bg-text-secondary;
+  }
+
+  /* Drafts Button Badge */
+  .drafts-count-badge {
+    @apply min-w-[18px] h-[18px] flex items-center justify-center
+           rounded-full bg-voice-accent text-white text-xs font-medium px-1;
   }
 }
 

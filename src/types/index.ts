@@ -282,3 +282,6 @@ export interface CoachingHint {
   type: 'technique' | 'warning' | 'encouragement'
   dismissed: boolean
 }
+
+// Re-export filter types
+export * from './filter'

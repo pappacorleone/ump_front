@@ -15,6 +15,7 @@ const config: Config = {
         surface: 'var(--surface)',
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
+        'text-tertiary': 'var(--text-tertiary)',
         'voice-accent': 'var(--voice-accent)',
         'damasio-lens': 'var(--damasio-lens)',
         // Additional lens colors

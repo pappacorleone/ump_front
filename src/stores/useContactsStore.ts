@@ -54,6 +54,114 @@ const mockContacts: Contact[] = [
     totalMessages: 234,
     typicalValence: 0.5,
     typicalIntensity: 0.4
+  },
+  {
+    id: '+1122334455',
+    name: 'Dad',
+    relationshipType: 'family',
+    voiceProfile: {
+      description: 'Male voice in his 60s, deep and steady tone',
+      gender: 'male',
+      ageRange: '60s',
+      accent: 'American',
+      typicalEmotions: ['supportive', 'proud', 'calm'],
+      speakingStyle: 'measured, thoughtful pauses'
+    },
+    firstInteraction: new Date('2022-06-01'),
+    lastInteraction: new Date(),
+    totalMessages: 156,
+    typicalValence: 0.4,
+    typicalIntensity: 0.3
+  },
+  {
+    id: '+5566778899',
+    name: 'Sister',
+    relationshipType: 'family',
+    voiceProfile: {
+      description: 'Female voice in her late 20s, energetic and upbeat',
+      gender: 'female',
+      ageRange: '20s',
+      accent: 'American',
+      typicalEmotions: ['excited', 'supportive', 'playful'],
+      speakingStyle: 'fast-paced, enthusiastic'
+    },
+    firstInteraction: new Date('2022-08-15'),
+    lastInteraction: new Date(),
+    totalMessages: 312,
+    typicalValence: 0.6,
+    typicalIntensity: 0.7
+  },
+  {
+    id: '+9988776655',
+    name: 'Brother',
+    relationshipType: 'family',
+    voiceProfile: {
+      description: 'Male voice in his early 30s, casual and relaxed',
+      gender: 'male',
+      ageRange: '30s',
+      accent: 'American',
+      typicalEmotions: ['relaxed', 'humorous', 'caring'],
+      speakingStyle: 'laid-back, occasional jokes'
+    },
+    firstInteraction: new Date('2022-07-01'),
+    lastInteraction: new Date(),
+    totalMessages: 189,
+    typicalValence: 0.3,
+    typicalIntensity: 0.4
+  },
+  {
+    id: '+1111111111',
+    name: 'Alex',
+    relationshipType: 'colleague',
+    voiceProfile: {
+      description: 'Male voice in his 40s, professional and direct',
+      gender: 'male',
+      ageRange: '40s',
+      accent: 'American',
+      typicalEmotions: ['focused', 'professional', 'collaborative'],
+      speakingStyle: 'clear, concise, business-like'
+    },
+    firstInteraction: new Date('2023-09-01'),
+    lastInteraction: new Date(),
+    totalMessages: 78,
+    typicalValence: 0.1,
+    typicalIntensity: 0.3
+  },
+  {
+    id: '+2222222222',
+    name: 'Jordan',
+    relationshipType: 'colleague',
+    voiceProfile: {
+      description: 'Non-binary voice in their 30s, friendly and approachable',
+      gender: 'non-binary',
+      ageRange: '30s',
+      accent: 'American',
+      typicalEmotions: ['friendly', 'helpful', 'patient'],
+      speakingStyle: 'warm, inclusive, encouraging'
+    },
+    firstInteraction: new Date('2023-10-15'),
+    lastInteraction: new Date(),
+    totalMessages: 45,
+    typicalValence: 0.4,
+    typicalIntensity: 0.4
+  },
+  {
+    id: '+3333333333',
+    name: 'Sam Miller',
+    relationshipType: 'friend',
+    voiceProfile: {
+      description: 'Male voice in his 30s, thoughtful and empathetic',
+      gender: 'male',
+      ageRange: '30s',
+      accent: 'British',
+      typicalEmotions: ['thoughtful', 'empathetic', 'curious'],
+      speakingStyle: 'reflective, good listener'
+    },
+    firstInteraction: new Date('2023-03-20'),
+    lastInteraction: new Date(),
+    totalMessages: 234,
+    typicalValence: 0.3,
+    typicalIntensity: 0.5
   }
 ]
 

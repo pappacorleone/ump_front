@@ -1,17 +1,16 @@
 'use client'
 
-import { type FC, useRef, useEffect, useState } from 'react'
+import { type FC, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { formatTime } from '@/lib/utils'
 import { useConversationStore } from '@/stores/useConversationStore'
 import { useContactsStore } from '@/stores/useContactsStore'
-import { useUIStore } from '@/stores/useUIStore'
-import { useConsciousnessStore } from '@/stores/useConsciousnessStore'
 import type { Message, LensType } from '@/types'
 import { LENSES } from '@/constants'
-import { Save, GingerLogo, Mic, Info, User, ChevronDown, Calendar, FileText } from '@/components/ui/Icons'
+import { Save, GingerLogo, Mic, FileText, User } from '@/components/ui/Icons'
 import { VoiceInput } from '../VoiceInput'
 import { MessageVoiceButton } from '@/components/voice/MessageVoiceButton'
+import { SentenceQueryBuilder } from '../filter'
 
 // Parse message content for highlighted terms and markdown-like formatting
 const formatMessageContent = (content: string, highlightedTerms?: string[]) => {
@@ -169,115 +168,6 @@ const MessageBubble: FC<{
   )
 }
 
-const ChatHeader: FC = () => {
-  const [showContactSelector, setShowContactSelector] = useState(false)
-  const [showTimeRange, setShowTimeRange] = useState(false)
-  const { contacts, selectedContactId, selectContact } = useContactsStore()
-  const { isImporting, importProgress } = useConversationStore()
-  const { addEmotionEvent } = useConsciousnessStore()
-
-  const selectedContact = selectedContactId ? contacts.find(c => c.id === selectedContactId) : null
-
-  const handleImport = () => {
-    // Mock import - in production this would trigger iMessage import
-    console.log('Import messages for:', selectedContact?.name)
-  }
-
-  return (
-    <div className="border-b border-border-light bg-surface">
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-3">
-          <h2 className="text-sm font-medium text-text-primary">Reflect</h2>
-          <Info size={16} className="text-text-secondary cursor-help" />
-        </div>
-
-        <div className="flex items-center gap-2">
-          {/* Time range picker */}
-          <div className="relative">
-            <button
-              onClick={() => setShowTimeRange(!showTimeRange)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface border border-border-light text-text-secondary hover:text-text-primary hover:border-border-medium transition-colors"
-            >
-              <Calendar size={14} />
-              Last 7 days
-              <ChevronDown size={12} />
-            </button>
-          </div>
-
-          {/* Contact selector */}
-          <div className="relative">
-            <button
-              onClick={() => setShowContactSelector(!showContactSelector)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-surface border border-border-light text-text-primary hover:border-border-medium transition-colors"
-            >
-              <User size={14} />
-              {selectedContact ? selectedContact.name : 'All Contacts'}
-              <ChevronDown size={12} />
-            </button>
-
-            {showContactSelector && (
-              <>
-                <div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setShowContactSelector(false)}
-                />
-                <div className="absolute right-0 top-full mt-2 w-56 bg-surface border border-border-light rounded-lg shadow-lg z-50 py-2 max-h-64 overflow-y-auto custom-scrollbar">
-                  <button
-                    onClick={() => {
-                      selectContact(null)
-                      setShowContactSelector(false)
-                    }}
-                    className="w-full px-4 py-2 text-left text-sm text-text-primary hover:bg-hover-surface transition-colors"
-                  >
-                    All Contacts
-                  </button>
-                  <div className="h-px bg-border-light my-1" />
-                  {contacts.map(contact => (
-                    <button
-                      key={contact.id}
-                      onClick={() => {
-                        selectContact(contact.id)
-                        setShowContactSelector(false)
-                      }}
-                      className={cn(
-                        'w-full px-4 py-2 text-left text-sm transition-colors',
-                        selectedContactId === contact.id
-                          ? 'bg-voice-accent/10 text-voice-accent'
-                          : 'text-text-primary hover:bg-hover-surface'
-                      )}
-                    >
-                      <div className="flex items-center gap-2">
-                        <User size={14} />
-                        {contact.name}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Import button */}
-          {selectedContact && (
-            <button
-              onClick={handleImport}
-              disabled={isImporting}
-              className={cn(
-                'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
-                isImporting
-                  ? 'bg-surface text-text-secondary cursor-wait'
-                  : 'bg-voice-accent text-white hover:bg-voice-accent/90'
-              )}
-            >
-              {isImporting ? `Importing ${Math.round(importProgress * 100)}%` : 'Import Messages'}
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export const EnhancedChatPanel: FC = () => {
   const { messages, addJournalEntry } = useConversationStore()
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -308,7 +198,7 @@ export const EnhancedChatPanel: FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-background">
-      <ChatHeader />
+      <SentenceQueryBuilder />
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-4">
